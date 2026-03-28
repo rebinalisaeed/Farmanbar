@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ckb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبۆرد - Pay Time Tour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-md-block sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4 class="text-white">Pay Time Tour</h4>
+                        <small class="text-white-50" id="userNameDisplay"></small>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">
+                                <i class="fas fa-tachometer-alt"></i> داشبۆرد
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="attendance.html">
+                                <i class="fas fa-clock"></i> هاتن و دەرچوون
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="employees.html">
+                                <i class="fas fa-users"></i> فەرمانبەران
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shifts.html">
+                                <i class="fas fa-calendar-alt"></i> شەفت و گروپ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="salary.html">
+                                <i class="fas fa-money-bill-wave"></i> مووچە
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reports.html">
+                                <i class="fas fa-chart-bar"></i> ڕاپۆرتەکان
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings.html">
+                                <i class="fas fa-cog"></i> ڕێکخستنەکان
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i> دەرچوون
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-10 ms-sm-auto px-md-4 main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">داشبۆرد</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <span id="currentDateTime" class="badge bg-secondary p-2"></span>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-muted mb-0">ژمارەی فەرمانبەران</p>
+                                    <h3 class="mt-2" id="totalEmployees">۰</h3>
+                                </div>
+                                <i class="fas fa-users fa-3x text-primary opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-muted mb-0">ئامادەبوونی ئەمڕۆ</p>
+                                    <h3 class="mt-2" id="todayAttendance">۰</h3>
+                                </div>
+                                <i class="fas fa-check-circle fa-3x text-success opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-muted mb-0">داواکاری ڕەخصی</p>
+                                    <h3 class="mt-2" id="pendingLeaves">۰</h3>
+                                </div>
+                                <i class="fas fa-clock fa-3x text-warning opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-muted mb-0">ئەم مانگە پارەدراوە</p>
+                                    <h3 class="mt-2" id="salaryPaid">۰</h3>
+                                </div>
+                                <i class="fas fa-money-bill-wave fa-3x text-info opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Attendance Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>دوایین هاتن و دەرچوونەکان</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ناوی فەرمانبەر</th>
+                                        <th>ڕۆژ</th>
+                                        <th>کاتی هاتن</th>
+                                        <th>کاتی دەرچوون</th>
+                                        <th>ڕەوش</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendanceTableBody">
+                                    <!-- Data loaded via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Check login status
+        if(!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+        
+        // Display user name
+        document.getElementById('userNameDisplay').textContent = localStorage.getItem('userName');
+        
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('currentDateTime').textContent = now.toLocaleString('ckb');
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+        
+        // Load stats (demo data)
+        document.getElementById('totalEmployees').textContent = '۲٤';
+        document.getElementById('todayAttendance').textContent = '۱۸';
+        document.getElementById('pendingLeaves').textContent = '۳';
+        document.getElementById('salaryPaid').textContent = '۱۲';
+        
+        // Load attendance data
+        const demoAttendance = [
+            { name: 'کارزان محەمەد', date: '2024-03-28', check_in: '08:00', check_out: '15:30', status: 'ئامادە' },
+            { name: 'شێرزاد عەلی', date: '2024-03-28', check_in: '08:15', check_out: '15:30', status: 'دواخستوو' },
+            { name: 'دیار حسێن', date: '2024-03-27', check_in: '08:00', check_out: '15:30', status: 'ئامادە' },
+            { name: 'سۆران ڕەشید', date: '2024-03-27', check_in: '-', check_out: '-', status: 'ڕەخصی' }
+        ];
+        
+        const tbody = document.getElementById('attendanceTableBody');
+        demoAttendance.forEach(att => {
+            const row = tbody.insertRow();
+            row.insertCell(0).textContent = att.name;
+            row.insertCell(1).textContent = att.date;
+            row.insertCell(2).textContent = att.check_in;
+            row.insertCell(3).textContent = att.check_out;
+            const statusCell = row.insertCell(4);
+            const statusClass = att.status === 'ئامادە' ? 'success' : (att.status === 'دواخستوو' ? 'warning' : 'info');
+            statusCell.innerHTML = `<span class="badge bg-${statusClass}">${att.status}</span>`;
+        });
+        
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
