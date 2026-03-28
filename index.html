@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ckb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لاتینی بۆ کوردی سۆرانی</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .sub {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .box {
+            margin-bottom: 20px;
+        }
+        .box label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            resize: vertical;
+            font-family: monospace;
+        }
+        .kurdish {
+            font-family: 'Noto Naskh Arabic', 'Segoe UI', Tahoma, sans-serif;
+            font-size: 22px;
+            direction: rtl;
+            background: #f9f9f9;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #667eea;
+            color: white;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #5a67d8;
+            transform: scale(0.98);
+        }
+        .btn-clear {
+            background: #e53e3e;
+        }
+        .btn-clear:hover {
+            background: #c53030;
+        }
+        .legend {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            font-size: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .legend span {
+            background: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            display: inline-flex;
+            gap: 5px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🖋️ گۆڕینی لاتینی بۆ کوردی سۆرانی</h1>
+    <div class="sub">لاتینی بنووسە، یەکسەر دەگۆڕێت بۆ کوردی</div>
+
+    <div class="box">
+        <label>⌨️ نووسینی لاتینی:</label>
+        <textarea id="latinInput" rows="5" placeholder="نموونە: salam choni? to bash i?"></textarea>
+    </div>
+
+    <div class="box">
+        <label>🇮🇶 ئەنجام بە کوردی:</label>
+        <textarea id="kurdishOutput" class="kurdish" rows="5" readonly></textarea>
+    </div>
+
+    <div class="buttons">
+        <button id="copyBtn">📋 کۆپی بکە</button>
+        <button id="clearBtn" class="btn-clear">🗑️ ڕوون بکەرەوە</button>
+    </div>
+
+    <div class="legend">
+        <span><b>a</b>→ا</span> <span><b>b</b>→ب</span> <span><b>c</b>→ج</span>
+        <span><b>ch</b>→چ</span> <span><b>d</b>→د</span> <span><b>e</b>→ە</span>
+        <span><b>f</b>→ف</span> <span><b>g</b>→گ</span> <span><b>gh</b>→غ</span>
+        <span><b>h</b>→هـ</span> <span><b>j</b>→ژ</span> <span><b>k</b>→ک</span>
