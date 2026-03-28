@@ -1,0 +1,65 @@
+const regex = new RegExp(escapedLatin, 'g');
+                result = result.replace(regex, kurdChar);
+            }
+            
+            // پاشان ھەر پیتێک کە نەگۆڕابێت (وەک ئەو پیتانەی لە mappingدا نیان) دیاری ناکەین
+            // بەڵام بەشێک لە پیتی "i" بەتاڵ کراوە و لادەبرێت.
+            // تێبینی: لە کاتی گۆڕینی "ch" دەبێتە چ، و "sh" دەبێتە ش، باش کاردەکات.
+            
+            // ئەگەر "i" لە ناو وشەدا بەتاڵ دەبێت، بەڵام لە کاتی گۆڕینی regex، ئەمەش بەباشی کاردەکات چونکە pattern "i" ھەیە و دەبێتە ""
+            // ئەمەش دەبێتە ھۆی لابردنی پیتی i لە تێکستەکەدا.
+            
+            // دوای گۆڕانەکان، ئەگەر ھێندێک پیتی وەک "ـ" بۆ هـ لە ناوەڕاستدا ئەم سیستەمە ھەر پیتی "h" دەکاتە "هـ" کە ڕاستە بۆ سەرەتا و ناوەڕاست، لە کۆتاییدا دەبێتە ھە.
+            // ھەروەھا تێبینی بۆ "وو" لە w.
+            return result;
+        }
+
+        // گرفتی پیتی "ح" بە دوو نووسە (") دەگۆڕێت بە ح. باش.
+        // هەروەها "ae" بۆ ئ، "yy" بۆ ێ
+        
+        // ئێستا بەستنەوەی DOM
+        const latinField = document.getElementById('latinInput');
+        const kurdField = document.getElementById('kurdishOutput');
+        const copyBtn = document.getElementById('copyBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        
+        function updateKurdish() {
+            const latinVal = latinField.value;
+            const converted = convertLatinToSorani(latinVal);
+            kurdField.value = converted;
+        }
+        
+        // ڕووداوی نووسین
+        latinField.addEventListener('input', updateKurdish);
+        
+        // کۆپیکردن
+        copyBtn.addEventListener('click', () => {
+            if (!kurdField.value.trim()) {
+                alert('هیچ دەقێک نییە بۆ کۆپیکردن!');
+                return;
+            }
+            kurdField.select();
+            kurdField.setSelectionRange(0, 99999); // بۆ مۆبایل
+            navigator.clipboard.writeText(kurdField.value).then(() => {
+                alert('✅ سەرکەوتوو کۆپی کرا!');
+            }).catch(() => {
+                alert('تکایە دەستکاری بکە و کۆپی بکە');
+            });
+        });
+        
+        // ڕوونکردنەوە
+        clearBtn.addEventListener('click', () => {
+            latinField.value = '';
+            kurdField.value = '';
+            latinField.focus();
+        });
+        
+        // بۆ یەکەمجار نموونەیەک دابنێ بۆ ئەوەی بینرێت
+        latinField.value = "salam choni? to bash i? a b ch sh gh rr ll yy ae \" x w v";
+        updateKurdish();
+        
+        // ھەروەھا دەتوانی تێبینی تایبەت بە "i" کە دەبێتە لابردن (بەتاڵ)
+    })();
+</script>
+</body>
+</html>
